@@ -1,0 +1,49 @@
+﻿@model IEnumerable<WebBanHang.Models.Product>
+
+@{
+    ViewData["Title"] = "Product List";
+}
+
+<h1>Product List</h1>
+
+<!-- Search form -->
+<form asp-action="Index" method="get" class="form-inline mb-4">
+    <input type="text" name="search" class="form-control mr-2" placeholder="Search by name or ID" value="@ViewData["SearchQuery"]" />
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+<!-- Product List Table -->
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th>Image</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.Id</td>
+                <td>@product.Name</td>
+                <td>@product.Price</td>
+                <td>@product.Description</td>
+                <td>@product.Category?.Name</td>
+                <td><img src="@Url.Content(product.ImageUrl)" width="100" height="100" alt="Product Image"></td>
+                <td>
+                    <a href="@Url.Action("Edit", "Product", new { id = product.Id, area = "Admin" })">Edit</a> |
+                    <a href="@Url.Action("Delete", "Product", new { id = product.Id, area = "Admin" })">Delete</a> |
+                    <a href="@Url.Action("Display", "Product", new { id = product.Id, area = "Admin" })">View</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Link to add new product -->
+<a asp-action="Add" class="btn btn-success mt-3">Add New Product</a>

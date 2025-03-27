@@ -1,0 +1,15 @@
+@model WebBanHang.Models.Product;
+
+<h1>Chi Tiết sản phẩm</h1>
+<div class="row">
+    <div class="col-md-6">
+        <img src="@Url.Content(Model.ImageUrl)" alt="ảnh tào lao" width="100%" height="100%">
+    </div>
+    <div class="col-md-6">
+        <h2>@Model.Name</h2>
+        <p>@Model.Description</p>
+        <p>Giá: @Model.Price</p>
+        <p>Danh mục: @Model.Category?.Name</p>
+    </div>
+</div>
+<a asp-action="Index" class="btn btn-secondary mt-3">Back to List</a>

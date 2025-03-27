@@ -1,0 +1,45 @@
+﻿@model WebBanHang.Models.Product
+
+@{
+    ViewData["Title"] = "Add Product";
+}
+
+<h1>Add Product</h1>
+
+<form method="post" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()  <!-- CSRF Token -->
+
+    <div class="form-group">
+        <label for="Name">Product Name</label>
+        <input type="text" class="form-control" id="Name" name="Name" value="@Model.Name" required />
+    </div>
+
+    <div class="form-group">
+        <label for="Description">Description</label>
+        <textarea class="form-control" id="Description" name="Description" required>@Model.Description</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="Price">Price</label>
+        <input type="number" class="form-control" id="Price" name="Price" value="@Model.Price" required />
+    </div>
+
+    <div class="form-group">
+        <label for="CategoryId">Category</label>
+        <select class="form-control" id="CategoryId" name="CategoryId" required>
+            @foreach (var category in ViewBag.Categories as List<WebBanHang.Models.Category>)
+            {
+                <option value="@category.Id">@category.Name</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="ImageUrl">Product Image</label>
+        <input type="file" class="form-control" id="ImageUrl" name="ImageUrl" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
+<a href="@Url.Action("Index", "Product", new { area = "Admin" })" class="btn btn-secondary mt-3">Back to Product List</a>

@@ -1,0 +1,53 @@
+@model WebBanHang.Models.Product
+@using Microsoft.AspNetCore.Mvc.Rendering
+
+@{
+    ViewData["Title"] = "Add Product";
+}
+
+<h1 class="mb-4">Add Product</h1>
+
+<form asp-action="Add" method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <!-- Tên sản phẩm -->
+    <div class="form-group">
+        <label asp-for="Name" class="font-weight-bold"></label>
+        <input asp-for="Name" class="form-control" placeholder="Enter product name" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <!-- Giá sản phẩm -->
+    <div class="form-group">
+        <label asp-for="Price" class="font-weight-bold"></label>
+        <input asp-for="Price" class="form-control" type="number" step="0.01" placeholder="Enter product price" />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+
+    <!-- Mô tả sản phẩm -->
+    <div class="form-group">
+        <label asp-for="Description" class="font-weight-bold"></label>
+        <textarea asp-for="Description" class="form-control" placeholder="Enter product description"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <!-- Chọn danh mục -->
+    <div class="form-group">
+        <label asp-for="CategoryId" class="font-weight-bold">Category</label>
+        <select asp-for="CategoryId" asp-items="ViewBag.Categories" class="form-control">
+            <option value="">-- Select Category --</option>
+        </select>
+        <span asp-validation-for="CategoryId" class="text-danger"></span>
+    </div>
+
+    <!-- Upload hình ảnh -->
+    <div class="form-group">
+    <label class="font-weight-bold" asp-for="ImageUrl">Image</label>
+    <input type="file" asp-for="ImageUrl" class="form-control-file" />
+</div>
+
+
+    <button type="submit" class="btn btn-primary mt-3">Add Product</button>
+</form>
+
+<a asp-action="Index" class="btn btn-secondary mt-3">Back to List</a>
